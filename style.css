@@ -1,5 +1,4 @@
 /* GENERAL */
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 * {
@@ -20,14 +19,12 @@ p {
 }
 
 /* TRANSITION */
-
 a,
 .btn {
   transition: all 300ms ease;
 }
 
 /* DESKTOP NAV */
-
 nav,
 .nav-links {
   display: flex;
@@ -60,14 +57,34 @@ a:hover {
 
 .logo {
   font-size: 2rem;
-}
-
-.logo:hover {
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  transition: color 300ms ease, transform 300ms ease;
   cursor: default;
 }
 
-/* HAMBURGER MENU */
+.logo::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #555;
+  transition: width 300ms ease;
+}
 
+.logo:hover {
+  color: #555;
+  transform: scale(1.05);
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+/* HAMBURGER MENU */
 #hamburger-nav {
   display: none;
 }
@@ -136,18 +153,10 @@ a:hover {
 
 .hamburger-icon span:first-child {
   transform: none;
-}
-
-.hamburger-icon span:first-child {
   opacity: 1;
 }
 
-.hamburger-icon span:first-child {
-  transform: none;
-}
-
 /* SECTIONS */
-
 section {
   padding-top: 4vh;
   height: 96vh;
@@ -161,7 +170,6 @@ section {
 }
 
 /* PROFILE SECTION */
-
 #profile {
   display: flex;
   justify-content: center;
@@ -207,19 +215,16 @@ section {
 }
 
 /* ICONS */
-
 .icon {
   cursor: pointer;
   height: 2rem;
 }
 
 /* BUTTONS */
-
 .btn-container {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  
 }
 
 .btn {
@@ -228,7 +233,6 @@ section {
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
-  
 }
 
 .btn-color-1,
@@ -264,7 +268,6 @@ section {
 }
 
 /* ABOUT SECTION */
-
 #about {
   position: relative;
 }
@@ -317,7 +320,6 @@ section {
 }
 
 /* EXPERIENCE SECTION */
-
 #experience {
   position: relative;
 }
@@ -341,34 +343,31 @@ section {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 2.5rem;
-  justify-content: space-between; /* Changed to space-between for better alignment */
+  justify-content: space-between;
 }
 
 article {
   display: flex;
-  align-items: center; /* Vertically align items within each article */
-  width: 12rem; /* Ensure a fixed width for each article */
-  justify-content: flex-start; /* Align items to the left */
+  align-items: center;
+  width: 12rem;
+  justify-content: flex-start;
   gap: 0.5rem;
-  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  white-space: nowrap;
 }
 
 article .icon {
   cursor: default;
-  
 }
 
 article h3,
 article p {
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis if text is too long */
-  white-space: nowrap; /* Prevent text from wrapping to next line */
-  margin: 0; /* Remove default margin */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
 }
 
-
 /* PROJECTS SECTION */
-
 #projects {
   position: relative;
 }
@@ -379,11 +378,11 @@ article p {
 }
 
 .project-img {
-    border-radius: 2rem;
-    width: 100%; /* Ensure images are responsive */
-    height: 200px; /* Set a fixed height */
-    object-fit: cover; /* Ensures images maintain aspect ratio and don't stretch */
-  }
+  border-radius: 2rem;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
 .project-title {
   margin: 1rem;
@@ -396,7 +395,6 @@ article p {
 }
 
 /* CONTACT */
-
 #contact {
   display: flex;
   justify-content: center;
@@ -436,7 +434,6 @@ article p {
 }
 
 /* FOOTER SECTION */
-
 footer {
   height: 26vh;
   margin: 0 1rem;
@@ -444,4 +441,25 @@ footer {
 
 footer p {
   text-align: center;
+}
+
+/* Hover Effects */
+.details-container:hover,
+.contact-info-upper-container:hover,
+.color-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease-in-out;
+}
+
+article:hover {
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  transition: background-color 300ms ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
