@@ -6,8 +6,11 @@ function toggleMenu() {
   }
 
   const typed = new Typed('#typevfx', {
-    strings: ['Frontend Developer', 'Python Developer','FullStack Developer','WebApp Developer','UI/UX Developer','Tech Enthusiast' ],
+    strings: ['Frontend Developer', 'Python Developer','FullStack Developer','WebApp Developer','UI/UX Developer','Tech Enthusiast'],
     typeSpeed: 60,
     backSpeed: 60,
-    backDelay: 100,
+    backDelay: 1000,
+    loop: true,
   });
+
+  
