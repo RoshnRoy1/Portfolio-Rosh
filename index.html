@@ -1,247 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roshan Roy</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <nav id="desktop-nav" data-aos="fade-down">
-      <div class="logo">Roshan Roy.</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav" data-aos="fade-down">
-      <div class="logo">Roshan Roy.</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      <div class="section__pic-container" data-aos="fade-right">
-        <img src="./assets/profile-pic.png" alt="John Doe profile picture" />
-      </div>
-      <div class="section__text" data-aos="fade-left">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Roshan Roy</h1>
-        <p class="section__text__p2" id="typevfx">Frontend Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/Roshan Resume.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/roshan-3613-roy'"
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roshan Roy Varghese — Full-Stack AI Developer</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/RoshnRoy1'"
-          />
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ── Navigation ─────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">RR<span class="accent">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about"    class="nav-link">About</a></li>
+        <li><a href="#skills"   class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+      <a href="./assets/Roshan Resume.pdf" download class="nav-cta">Resume</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about"    class="mobile-link">About</a>
+      <a href="#skills"   class="mobile-link">Skills</a>
+      <a href="#projects" class="mobile-link">Projects</a>
+      <a href="#contact"  class="mobile-link">Contact</a>
+      <a href="./assets/Roshan Resume.pdf" download class="mobile-link">Resume ↓</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Roshan<br /><span class="gradient-text">Roy</span></h1>
+        <p class="hero-role"><span id="typed"></span></p>
+        <p class="hero-bio">Full-Stack Developer &amp; AI Researcher — building intelligent systems at the intersection of modern web and machine learning.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">View My Work</a>
+          <a href="#contact"  class="btn-secondary">Get In Touch</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://linkedin.com/in/roshan-3613-roy" target="_blank" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/RoshnRoy1" target="_blank" class="social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="mailto:roshanroyvarghese1@gmail.com" class="social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          </a>
         </div>
       </div>
-    </section>
-    <section id="about">
-      <p class="section__text__p1" data-aos="fade-up">Get To Know More</p>
-      <h1 class="title" data-aos="fade-up">About Me</h1>
-      <div class="about-details-container" data-aos="fade-up">
-        <div class="about-containers">
-          <div class="details-container" data-aos="zoom-in" data-aos-delay="100">
-            <img
-              src="./assets/experience.png"
-              alt="Experience icon"
-              class="icon"
-            />
-            <h3>Experience</h3>
-            <p>1+ years <br />Frontend Development</p>
-          </div>
-          <div class="details-container" data-aos="zoom-in" data-aos-delay="200">
-            <img
-              src="./assets/education.png"
-              alt="Education icon"
-              class="icon"
-            />
-            <h3>Education & Internship</h3>
-            <p>B.Tech Computer Science<br />Python FullStack Program</p>
+
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="./assets/prof-pic.png" alt="Roshan Roy" class="hero-image" />
+          <div class="hero-image-glow"></div>
+          <div class="hero-image-ring ring-1"></div>
+          <div class="hero-image-ring ring-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── About ─────────────────────────────────── -->
+  <section class="section about" id="about">
+    <div class="section-inner">
+      <p class="section-label">Get To Know More</p>
+      <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-image-col">
+          <div class="about-image-wrapper">
+            <img src="./assets/about-pic.png" alt="About Roshan" class="about-image" />
+            <div class="about-image-border"></div>
           </div>
         </div>
-        <div class="text-container" data-aos="fade-up" data-aos-delay="300">
-          <p>
-            I hold a B.Tech in Computer Science from Amal Jyothi College of
-            Engineering, complemented by hands-on training at QSpiders. During
-            my internship, I gained practical experience in full-stack
-            development. After the program, I applied my skills by working on
-            multiple real-world projects, further enhancing my technical and
-            problem-solving abilities.
+        <div class="about-text-col">
+          <div class="about-cards">
+            <div class="about-card glass-card">
+              <div class="about-card-icon">⚡</div>
+              <div>
+                <h3>Experience</h3>
+                <p>2+ Years<br />Full-Stack &amp; AI Development</p>
+              </div>
+            </div>
+            <div class="about-card glass-card">
+              <div class="about-card-icon">🎓</div>
+              <div>
+                <h3>Education</h3>
+                <p>MSc Artificial Intelligence<br />Heriot-Watt University</p>
+              </div>
+            </div>
+          </div>
+          <p class="about-bio">
+            I'm a Full-Stack Developer turned AI Researcher, currently pursuing my <strong>MSc in Artificial Intelligence at Heriot-Watt University</strong>, Edinburgh. My work sits at the intersection of intuitive UI and intelligent systems — from building bilingual e-commerce experiences to researching the faithfulness-simplicity trade-off in Explainable AI using SHAP and LIME.<br /><br />
+            Whether I'm fine-tuning large language models, designing accessible interfaces, or shipping production-ready features, I'm driven by one goal: building systems that are as transparent as they are powerful.
           </p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
-    <section id="experience">
-      <p class="section__text__p1" data-aos="fade-up">Explore My</p>
-      <h1 class="title" data-aos="fade-up">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container" data-aos="fade-right">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>HTML</h3><p>Experienced</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>CSS</h3><p>Experienced</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>React</h3><p>Novice</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>JavaScript</h3><p>Intermediate</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>TypeScript</h3><p>Novice</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>Material UI</h3><p>Basic</p></div></article>
+  <!-- ── Skills ────────────────────────────────── -->
+  <section class="section skills" id="skills">
+    <div class="section-inner">
+      <p class="section-label">What I Work With</p>
+      <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+      <div class="skills-grid">
+        <div class="skills-col glass-card">
+          <h3 class="skills-col-title">Frontend</h3>
+          <div class="skill-bars">
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">React</span><span class="skill-pct">80%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
             </div>
-          </div>
-          <div class="details-container" data-aos="fade-left">
-            <h2 class="experience-sub-title">Backend/Languages</h2>
-            <div class="article-container">
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>SQL</h3><p>Experienced</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>Python</h3><p>Experienced</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>Node JS</h3><p>Basic</p></div></article>
-              <article><img src="./assets/checkmark.png" class="icon" /><div><h3>Git</h3><p>Intermediate</p></div></article>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">Tailwind CSS</span><span class="skill-pct">85%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">JavaScript</span><span class="skill-pct">78%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">HTML / CSS</span><span class="skill-pct">92%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">Vite</span><span class="skill-pct">72%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
             </div>
           </div>
         </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
-    </section>
-    <section id="projects">
-      <p class="section__text__p1" data-aos="fade-up">Browse My Recent</p>
-      <h1 class="title" data-aos="fade-up">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container" data-aos="flip-left">
-            <div class="article-container">
-              <img src="./assets/project-1.png" alt="Project 1" class="project-img" />
+        <div class="skills-col glass-card">
+          <h3 class="skills-col-title">AI &amp; Backend</h3>
+          <div class="skill-bars">
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">Python</span><span class="skill-pct">88%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
             </div>
-            <h2 class="experience-sub-title project-title">Real Estate</h2>
-            <div class="btn-container">
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/RoshnRoy1/UrbEstate', '_blank')">Github</button>
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://urbestate-rosh.netlify.app/', '_blank')">Live Demo</button>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">NLP &amp; LLMs</span><span class="skill-pct">75%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
             </div>
-          </div>
-          <div class="details-container color-container" data-aos="flip-left" data-aos-delay="150">
-            <div class="article-container">
-              <img src="./assets/project-2.png" alt="Project 2" class="project-img" />
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">SHAP &amp; LIME (XAI)</span><span class="skill-pct">80%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
             </div>
-            <h2 class="experience-sub-title project-title">Kobodrop App</h2>
-            <div class="btn-container">
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/RoshnRoy1/kobodrop-app','_blank')">Github</button>
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://kobodrop-rosh.netlify.app/','_blank')">Live Demo</button>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">SQL</span><span class="skill-pct">82%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
             </div>
-          </div>
-          <div class="details-container color-container" data-aos="flip-left" data-aos-delay="300">
-            <div class="article-container">
-              <img src="./assets/project-3.png" alt="Project 3" class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Fitness</h2>
-            <div class="btn-container">
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/RoshnRoy1/Fit-by-Rosh/','_blank')">Github</button>
-              <button class="btn btn-color-2 project-btn" onclick="window.open('https://fit-rosh.vercel.app/','_blank')">Live Demo</button>
+            <div class="skill-item">
+              <div class="skill-header"><span class="skill-name">Git &amp; LaTeX</span><span class="skill-pct">78%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
             </div>
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
-    </section>
-    <section id="contact">
-      <p class="section__text__p1" data-aos="fade-up">Get in Touch</p>
-      <h1 class="title" data-aos="fade-up">Contact Me</h1>
-      <div class="contact-info-upper-container" data-aos="fade-up">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:examplemail@gmail.com">roshanroyvarghese1@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- ── Projects ─────────────────────────────── -->
+  <section class="section projects" id="projects">
+    <div class="section-inner">
+      <p class="section-label">Case Studies</p>
+      <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+      <div class="projects-grid">
+
+        <!-- Project 1: Suhool Shinas -->
+        <div class="project-card glass-card" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.12">
+          <div class="project-image-wrap">
+            <img src="./assets/project-1.png" alt="Suhool Shinas INTL" class="project-image" />
+            <div class="project-overlay">
+              <a href="https://github.com/RoshnRoy1/Suhool_Shinas" target="_blank" class="overlay-btn">GitHub</a>
+              <a href="https://suhoolshinas.netlify.app/" class="overlay-btn overlay-btn-accent">Live Demo</a>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-badge">Freelance · Client Work</span>
+            <h3 class="project-title">Suhool Shinas INTL</h3>
+            <p class="project-desc">Bilingual (EN/AR) e-commerce catalogue for an Omani brand — full RTL switching, dynamic JSON rendering, and a WhatsApp-integrated ordering flow with pre-filled messages.</p>
+            <div class="project-tags">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">RTL</span>
+            </div>
+          </div>
         </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://www.linkedin.com/in/roshan-3613-roy">LinkedIn</a>
-</p>
+
+        <!-- Project 2: UrbEstate -->
+        <div class="project-card glass-card" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.12">
+          <div class="project-image-wrap">
+            <img src="./assets/project-2.png" alt="UrbEstate" class="project-image" />
+            <div class="project-overlay">
+              <a href="https://github.com/RoshnRoy1/UrbEstate" target="_blank" class="overlay-btn">GitHub</a>
+              <a href="https://urbestate-rosh.netlify.app" target="_blank" class="overlay-btn overlay-btn-accent">Live Demo</a>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-badge">Web App · Full-Stack</span>
+            <h3 class="project-title">UrbEstate</h3>
+            <p class="project-desc">Production-grade real estate platform — dynamic property listings, search filters, and detailed views built with React and Tailwind for a polished, responsive experience.</p>
+            <div class="project-tags">
+              <span class="tag">React</span><span class="tag">Tailwind</span><span class="tag">Node.js</span><span class="tag">Vite</span>
+            </div>
+          </div>
         </div>
+
+        <!-- Project 3: Kobodrop -->
+        <div class="project-card glass-card" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.12">
+          <div class="project-image-wrap">
+            <img src="./assets/project-3.png" alt="Kobodrop" class="project-image" />
+            <div class="project-overlay">
+              <a href="https://github.com/RoshnRoy1/kobodrop-app" target="_blank" class="overlay-btn">GitHub</a>
+              <a href="https://kobodrop-rosh.netlify.app" target="_blank" class="overlay-btn overlay-btn-accent">Live Demo</a>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-badge">Web App · Full-Stack</span>
+            <h3 class="project-title">Kobodrop</h3>
+            <p class="project-desc">Peer-to-peer file-sharing app with smooth animations, real-time interactions, and a clean component architecture — built for speed and simplicity.</p>
+            <div class="project-tags">
+              <span class="tag">React</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span><span class="tag">CSS</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </section>
-    <footer data-aos="fade-up">
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+    </div>
+  </section>
+
+  <!-- ── Contact ───────────────────────────────── -->
+  <section class="section contact" id="contact">
+    <div class="section-inner">
+      <p class="section-label">Let's Talk</p>
+      <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      <div class="contact-container glass-card">
+        <div class="contact-text">
+          <h3>Let's Build Something Intelligent</h3>
+          <p>I'm actively seeking Full-Stack or AI Engineering roles in the UK. Whether it's a collaboration, an opportunity, or just a great conversation about LLMs — my inbox is always open.</p>
         </div>
+        <div class="contact-links">
+          <a href="mailto:roshanroyvarghese1@gmail.com" class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label">Email</span>
+              <span class="contact-item-value">roshanroyvarghese1@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/roshan-3613-roy" target="_blank" class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <span class="contact-item-label">LinkedIn</span>
+              <span class="contact-item-value">roshan-3613-roy</span>
+            </div>
+          </a>
+        </div>
+        <a href="./assets/Roshan Resume.pdf" download class="btn-primary contact-resume-btn">Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-logo">RR<span class="accent">.</span></p>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <p>With love, Rosh ❤️</p>
-    </footer>
+      <p class="footer-copy">Made with <span class="heart">&#9829;</span> by Rosh &copy; 2025</p>
+    </div>
+  </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        offset: 200,
-        duration: 1200,
-        delay: 100,
-        once: true,
-      });
-    </script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
