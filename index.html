@@ -42,6 +42,13 @@ body::before {
   background-size: 200px; opacity: 0.028; pointer-events: none;
 }
 
+/* ANIMATED BACKGROUND */
+.bg-field { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bg-grid { position: absolute; inset: -60%; background-image: radial-gradient(circle, rgba(232,228,220,.05) 1px, transparent 1px); background-size: 40px 40px; animation: bgDrift 60s linear infinite; }
+@keyframes bgDrift { from { transform: translate(0,0); } to { transform: translate(40px,40px); } }
+.bg-orb { position: absolute; top: 34%; left: 50%; width: min(70vw,760px); height: min(70vw,760px); transform: translate(-50%,-50%); background: radial-gradient(circle, rgba(74,222,128,.09), rgba(74,222,128,0) 62%); filter: blur(30px); will-change: transform; }
+.bg-orb.two { top: 88%; left: 20%; width: min(46vw,520px); height: min(46vw,520px); background: radial-gradient(circle, rgba(127,119,221,.075), rgba(127,119,221,0) 62%); }
+
 /* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
@@ -158,7 +165,7 @@ nav {
   background: #0C0C0B; margin-bottom: 64px;
 }
 .featured-visual { position: relative; overflow: hidden; background: #111; border-right: 1px solid rgba(232,228,220,.09); min-height: 340px; }
-.featured-visual img { width: 100%; height: 100%; object-fit: cover; object-position: left top; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.featured-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 54% top; transition: transform .7s cubic-bezier(.22,1,.36,1); }
 .featured:hover .featured-visual img { transform: scale(1.03); }
 .featured-badge {
   position: absolute; top: 18px; left: 18px; z-index: 2;
@@ -252,31 +259,17 @@ footer { border-top: 1px solid rgba(232,228,220,.07); padding: 28px clamp(24px, 
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; }
 
-/* ANIMATED AVATAR (Ink Line + Black Mirror glitch) */
-.about-avatar { position: relative; width: 100%; max-width: 330px; aspect-ratio: 1/1; border-radius: 4px; overflow: hidden; background: #0C0C0B; border: 1px solid rgba(232,228,220,.1); cursor: none; }
-.about-avatar svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* ANIMATED AVATAR (clean minimalist portrait) */
+.about-avatar { position: relative; width: 100%; max-width: 330px; aspect-ratio: 1/1; border-radius: 6px; overflow: hidden; background: #0C0C0B; border: 1px solid rgba(232,228,220,.1); display: flex; align-items: center; justify-content: center; }
+.about-avatar::before { content: ''; position: absolute; width: 72%; height: 72%; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-56%); background: radial-gradient(circle, rgba(74,222,128,.12), rgba(74,222,128,0) 66%); filter: blur(26px); opacity: .55; transition: opacity .45s; }
+.about-avatar:hover::before { opacity: 1; }
+.about-avatar svg { position: relative; z-index: 1; width: 82%; height: 82%; }
 .av-float { animation: avFloat 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes avFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-.av-eye { transform-box: fill-box; transform-origin: center; animation: avBlink 5s infinite; }
-@keyframes avBlink { 0%,92%,100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
-.av-chan { opacity: 0; mix-blend-mode: screen; }
-.av-r { animation: avAutoR 7s infinite; }
-.av-b { animation: avAutoB 7s infinite; }
-@keyframes avAutoR { 0%,86%,100% { opacity:0; transform:translate(0,0); } 88% { opacity:.6; transform:translate(2.5px,-1.5px); } 91% { opacity:.6; transform:translate(-2px,1.5px); } 94% { opacity:0; transform:translate(0,0); } }
-@keyframes avAutoB { 0%,86%,100% { opacity:0; transform:translate(0,0); } 88% { opacity:.6; transform:translate(-2.5px,1.5px); } 91% { opacity:.6; transform:translate(2px,-1.5px); } 94% { opacity:0; transform:translate(0,0); } }
-.about-avatar:hover .av-r { animation: avHovR .28s steps(2) infinite; opacity: .6; }
-.about-avatar:hover .av-b { animation: avHovB .28s steps(2) infinite; opacity: .6; }
-@keyframes avHovR { 0%,100% { transform: translate(2.5px,-1px); } 50% { transform: translate(-2px,1.5px); } }
-@keyframes avHovB { 0%,100% { transform: translate(-2.5px,1px); } 50% { transform: translate(2px,-1.5px); } }
+.av-eye { transform-box: fill-box; transform-origin: center; animation: avBlink 5.5s infinite; }
+@keyframes avBlink { 0%,93%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.av-main { stroke: #E8E4DC; transition: stroke .45s; }
 .about-avatar:hover .av-main { stroke: #4ADE80; }
-.av-main { stroke: #E8E4DC; transition: stroke .3s; }
-.av-scan { position: absolute; left: 0; right: 0; height: 46px; background: linear-gradient(to bottom, transparent, rgba(74,222,128,.07), transparent); animation: avScan 4s linear infinite; z-index: 3; pointer-events: none; opacity: .55; }
-@keyframes avScan { 0% { transform: translateY(-120%); } 100% { transform: translateY(420%); } }
-.about-avatar::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.16) 3px, rgba(0,0,0,0) 4px); pointer-events: none; z-index: 4; opacity: .45; transition: opacity .4s; }
-.about-avatar:hover::after { opacity: .85; }
-.about-avatar:hover .av-scan { opacity: 1; animation-duration: 2.2s; }
-.av-corner { position: absolute; z-index: 5; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .08em; color: #4B4846; bottom: 10px; right: 12px; pointer-events: none; }
-.about-avatar:hover .av-corner { color: #4ADE80; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -305,6 +298,8 @@ footer { border-top: 1px solid rgba(232,228,220,.07); padding: 28px clamp(24px, 
 <body>
 <div id="cursor"></div>
 
+<div class="bg-field" aria-hidden="true"><div class="bg-grid"></div><div class="bg-orb"></div><div class="bg-orb two"></div></div>
+
 <nav id="nav">
   <a href="#hero" class="nav-logo">Roshan Roy<span>.</span></a>
   <div class="nav-right">
@@ -322,7 +317,6 @@ footer { border-top: 1px solid rgba(232,228,220,.07); padding: 28px clamp(24px, 
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-text" id="heroBgText">AI</div>
   <div class="hero-content">
     <p class="hero-eyebrow"><span class="tick">▹</span> MSc Artificial Intelligence · Heriot-Watt University · Edinburgh</p>
     <h1 class="hero-name">Roshan <em>Roy.</em></h1>
@@ -352,23 +346,6 @@ footer { border-top: 1px solid rgba(232,228,220,.07); padding: 28px clamp(24px, 
 <section class="section" id="about">
   <div class="about-photo-wrap reveal">
     <div class="about-avatar">
-      <!-- red channel -->
-      <svg class="av-chan av-r" viewBox="0 0 120 120" fill="none" stroke="#ff3b3b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g>
-        <path d="M38 50 C36 30 50 22 60 22 C70 22 84 30 82 50"/>
-        <path d="M40 48 C38 70 46 86 60 86 C74 86 82 70 80 48"/>
-        <path d="M47 61 C49 59 53 59 55 61 M65 61 C67 59 71 59 73 61"/>
-        <path d="M52 77 C56 80 64 80 68 77"/>
-        <path d="M34 100 C40 90 48 88 54 90 L60 96 L66 90 C72 88 80 90 86 100"/>
-      </g></svg>
-      <!-- blue channel -->
-      <svg class="av-chan av-b" viewBox="0 0 120 120" fill="none" stroke="#2b9bff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g>
-        <path d="M38 50 C36 30 50 22 60 22 C70 22 84 30 82 50"/>
-        <path d="M40 48 C38 70 46 86 60 86 C74 86 82 70 80 48"/>
-        <path d="M47 61 C49 59 53 59 55 61 M65 61 C67 59 71 59 73 61"/>
-        <path d="M52 77 C56 80 64 80 68 77"/>
-        <path d="M34 100 C40 90 48 88 54 90 L60 96 L66 90 C72 88 80 90 86 100"/>
-      </g></svg>
-      <!-- main ink portrait -->
       <svg class="av-main" viewBox="0 0 120 120" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Illustrated portrait of Roshan Roy">
         <g class="av-float">
           <path d="M38 50 C36 30 50 22 60 22 C70 22 84 30 82 50"/>
@@ -386,8 +363,6 @@ footer { border-top: 1px solid rgba(232,228,220,.07); padding: 28px clamp(24px, 
           <path d="M54 90 L58 98 M66 90 L62 98" stroke-width="1.1" opacity=".6"/>
         </g>
       </svg>
-      <div class="av-scan"></div>
-      <span class="av-corner">REC ●</span>
     </div>
     <p class="about-photo-tag">Edinburgh, Scotland<br/>Originally from Kerala, India</p>
   </div>
@@ -609,10 +584,10 @@ document.querySelectorAll('a, button, .project-row, .contact-item, .featured').f
 });
 (function loop(){ cx += (mx-cx)*.14; cy += (my-cy)*.14; cursor.style.left=cx+'px'; cursor.style.top=cy+'px'; requestAnimationFrame(loop); })();
 
-const heroBg = document.getElementById('heroBgText');
+const bgOrbs = document.querySelectorAll('.bg-orb');
 window.addEventListener('scroll', () => {
   const y = window.pageYOffset;
-  if (heroBg) { heroBg.style.transform = `translate(-50%, calc(-50% + ${y*0.35}px))`; heroBg.style.opacity = Math.max(0, 1 - y/700); }
+  bgOrbs.forEach((o, i) => { o.style.transform = `translate(-50%, calc(-50% + ${y * (i ? 0.1 : 0.2)}px))`; });
 }, { passive: true });
 
 const nav = document.getElementById('nav');
